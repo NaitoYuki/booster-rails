@@ -1,9 +1,15 @@
 ja:
   admin:
     site_title: Admin MVP Template
+
     title:
       admin_users:
         index: 管理者アカウント管理
+        sessions:
+          new: ログイン
+        passwords:
+          new: パスワード再設定
+          edit: パスワード再設定
       users:
         index: ユーザ管理
 
@@ -13,6 +19,7 @@ ja:
       edit: 編集
       destroy: 削除
       search: 検索
+      cancel: キャンセル
 
     messages:
       create:

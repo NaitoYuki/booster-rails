@@ -1,12 +1,12 @@
 - content_for :title, t('admin.title.admin_users.index')
 - breadcrumb :admin_users
 
-.x_panel
-  .x_content
-    .pull-right
-      ul.list-inline
-        li = link_to t('admin.actions.new'), new_admin_admin_user_path, class: 'btn-new'
-    .clearfix
+.card
+  .card-header
+    .card-header-title = yield :title
+    .card-header-actions
+      = link_to t('admin.actions.new'), new_admin_admin_user_path, class: 'btn-new'
+  .card-body
     table.table.table-hover
       thead
         tr
@@ -22,7 +22,7 @@
             td = admin_user.id
             td = admin_user.name
             td = admin_user.email
-            td = l(admin_user.created_at)
-            td = l(admin_user.updated_at)
+            td = l(admin_user.created_at, format: :long)
+            td = l(admin_user.updated_at, format: :long)
             td = link_to t('admin.actions.show'), admin_admin_user_path(admin_user), class: 'btn-show'
     = paginate @admin_users, theme: :admin

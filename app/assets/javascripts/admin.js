@@ -1,4 +1,2 @@
-//= require rails-ujs
-//= require jquery/dist/jquery.min
-//= require bootstrap/dist/js/bootstrap.min
-//= require gentelella/build/js/custom.min
+//= require @coreui/coreui/dist/js/coreui.bundle.min
+//= require @coreui/coreui/dist/js/coreui-utilities.min

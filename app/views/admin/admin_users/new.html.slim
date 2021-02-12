@@ -1,4 +1,8 @@
 - content_for :title, t('admin.actions.new')
-.x_panel
-  .x_content
+- breadcrumb :new_admin_user
+
+.card
+  .card-header
+    .card-header-title = yield :title
+  .card-body
     = render 'form', resource: @admin_user
