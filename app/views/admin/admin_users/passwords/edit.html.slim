@@ -1,9 +1,21 @@
-= form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put } do |f|
-  h1 = t('admin.site_title')
-  = f.hidden_field :reset_password_token
-  div
-    = f.password_field :password, class: 'form-control', placeholder: t('devise.passwords.edit.new_password'), autocomplete: 'off'
-  div
-    = f.password_field :password_confirmation, class: 'form-control', placeholder: t('devise.passwords.edit.confirm_new_password'), autocomplete: 'off'
-  div
-    = f.submit t('devise.passwords.edit.change_my_password'), class: 'btn btn-default'
+- content_for :title, t('admin.title.admin_users.passwords.edit')
+
+.card.p-4
+  .card-body
+    = form_with model: resource, as: resource_name, url: password_path(resource_name), method: :put, local: true do |f|
+      h1 = t('admin.site_title')
+      p.text-muted = t('admin.title.admin_users.passwords.edit')
+      = f.hidden_field :reset_password_token
+      .input-group.mb-3
+        .input-group-prepend
+          span.input-group-text
+            i.cil-lock-locked
+        = f.password_field :password, class: 'form-control', placeholder: t('devise.passwords.edit.new_password'), autocomplete: 'off'
+      .input-group.mb-3
+        .input-group-prepend
+          span.input-group-text
+            i.cil-lock-locked
+        = f.password_field :password_confirmation, class: 'form-control', placeholder: t('devise.passwords.edit.confirm_new_password'), autocomplete: 'off'
+      ul.list-inline
+        li.list-inline-item
+          = f.submit t('devise.passwords.edit.change_my_password'), class: 'btn btn-primary'

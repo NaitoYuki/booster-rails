@@ -1,4 +1,4 @@
-= bootstrap_form_for [:admin, resource] do |f|
+= bootstrap_form_with model: [:admin, resource], layout: :horizontal, local: true do |f|
   = f.text_field :name
   = f.text_field :email
   - if resource.new_record?

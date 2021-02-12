@@ -2,66 +2,51 @@ doctype html
 html lang="ja"
   head
     meta charset="utf8"
-    title = t('admin.site_title')
+    meta name="viewport" content="width=1280, initial-scale=1, shrink-to-fit=no"
+    title
+      = yield :title
+      | &nbsp;|&nbsp;
+      = t('admin.site_title')
     = csrf_meta_tags
-
-    = stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
-    link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"
+    = stylesheet_link_tag 'https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/all.min.css', media: 'all'
     = stylesheet_link_tag 'admin', media: 'all'
+    = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
+    / link href="#{asset_url('logo.jpg')}" rel="apple-touch-icon"
 
-  body.nav-md
-    .container.body
-      .main_container
-        .col-md-3.left_col
-          .left_col.scroll-view
-            .navbar.nav_title
-              = link_to '#', class: 'site_title' do
-                span style="margin-left: 1em; font-size: 0.7em;"
-                  = t('admin.site_title')
-            .clearfix
-            #sidebar-menu.main_menu_side.hidden-print.main_menu
-              .menu_section
-                ul.nav.side-menu
-                  li
-                    = link_to admin_admin_users_path do
-                      i.fa.fa-user-secret
-                      = t('admin.title.admin_users.index')
-                  li
-                    = link_to admin_users_path do
-                      i.fa.fa-user
-                      = t('admin.title.users.index')
+  body.c-app
+    #sidebar.c-sidebar.c-sidebar-dark.c-sidebar-fixed.c-sidebar-lg-show
+      .c-sidebar-brand.d-md-down-none
+        = t('admin.site_title')
+      ul.c-sidebar-nav.ps.ps--active-y
+        li.c-sidebar-nav-item class="#{'c-active' if controller_name == 'admin_users'}"
+          = link_to admin_admin_users_path, class: 'c-sidebar-nav-link' do
+            i.cil-user.mr-1
+            = t('admin.title.admin_users.index')
+      / button.c-sidebar-minimizer.c-class-toggler data-class="c-sidebar-minimized" data-target="_parent" type="button" 
 
-        .top_nav
-          .nav_menu
-            nav
-              .nav.toggle
-                a#menu_toggle
-                  i.fa.fa-bars
-              ul.nav.navbar-nav.navbar-right
-                li
-                  a.user-profile.dropdown-toggle data-toggle="dropdown"
-                    i.fa.fa-user-secret
-                    | &nbsp;
-                    = current_admin_user.name
-                    | &nbsp;
-                    i.fa.fa-angle-down
-                  ul.dropdown-menu.dropdown-usermenu.pull-right
-                    li = link_to t('admin.header.edit'), edit_admin_admin_user_path(current_admin_user)
-                    li = link_to t('admin.header.password'), password_admin_admin_users_path
-                    li.divider
-                    li = link_to t('admin.header.sign_out'), destroy_admin_user_session_path, method: :delete
+    .c-wrapper
+      header.c-header.c-header-light.c-header-fixed
+        button.c-header-toggler.c-class-toggler.mfs-3.d-md-down-none data-class="c-sidebar-lg-show" data-target="#sidebar" responsive="true" type="button"
+          i.cil-hamburger-menu
+        ul.c-header-nav.mfs-auto
+          li.c-header-nav-item.dropdown
+            a.c-header-nav-link aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+              i.cil-user.mr-1
+              = current_admin_user.name
+            .dropdown-menu.dropdown-menu-right.pt-0
+              = link_to t('admin.header.edit'), edit_admin_admin_user_path(current_admin_user), class: 'dropdown-item'
+              = link_to t('admin.header.password'), password_admin_admin_users_path, class: 'dropdown-item'
+              .dropdown-divider
+              = link_to t('admin.header.sign_out'), destroy_admin_user_session_path, class: 'dropdown-item', method: :delete
+        .c-subheader.justify-content-between.px-3
+          == breadcrumbs style: :bootstrap4, class: 'breadcrumb border-0 m-0 px-0 px-md-3'
 
-        .right_col role="main"
-          .page-title
-            .title_left
-              h3 = yield :title
-            .title_right
-              == breadcrumbs style: :bootstrap
-          .clearfix
-          - if notice
-            .flash-notice = notice
-          - if alert
-            .flash-alert = alert
-          = yield
-
-    = javascript_include_tag 'admin'
+      .c-body
+        main.c-main
+          .container-fluid
+            .fade-in
+              - if notice
+                .flash-notice = notice
+              - if alert
+                .flash-alert = alert
+              = yield
