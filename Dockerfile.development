@@ -1,7 +1,7 @@
-FROM ruby:2.7.2
+FROM ruby:2.7.3-buster
 ENV LANG C.UTF-8
 
-ENV APP_HOME /booster-rails
+ENV APP_HOME /app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 

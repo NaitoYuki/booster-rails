@@ -27,4 +27,4 @@ $ docker-compose exec app sh
 
 ## 参考URL
 
-- [Gentelella](https://colorlib.com/polygon/gentelella/) (管理画面で使っているBootstrapテーマ)
+- [CoreUI](https://coreui.io/) (管理画面で使っているBootstrapテーマ)
